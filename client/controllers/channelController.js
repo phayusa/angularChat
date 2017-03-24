@@ -1,4 +1,4 @@
-app.controller('chanCtrl', function($scope, chanFactory){
+app.controller('chanCtrl', function($scope, chanFactory, messageFactory){
 
   $scope.getAllChannels = function(){
     $scope.channels = [];
@@ -15,19 +15,42 @@ app.controller('chanCtrl', function($scope, chanFactory){
   }
 
   $scope.connectChannel = function(roomName){
-    $scope.socket.leave($scope.currentRoom);
-    $scope.socket.join(roomName);
+    // socket.emit("leave room",$scope.currentRoom);
+    $scope.leaveRoom(roomName);
+    socket.emit('enter room', roomName);
     $scope.currentRoom = roomName;
-    $scope.socket.to($scope.currentRoom).emit('connection');
+    var id = $scope.channels.find("name":roomName)["id"];
+    $scope.message = messageFactory.getAllMessageFromChannel(id);
   }
 
   $scope.sendMessage = function(message){
-    $scope.socket.to($scope.currentRoom).emit(message);
+      console.log(message);
+      socket.emit("send message","j'ai envoyé bis");
   }
 
-  $scope.test = "sss";
+  $scope.leaveRoom = function(roomName){
+    socket.emit('leave room',roomName);
+  }
+
+  $scope.messages = [];
   $scope.getAllChannels();
-  $scope.socket = io('http://localhost:3000');
-  $scope.currentRoom = "test";
+  $scope.currentRoom = "";
   $scope.buttonForm = [{idName:"message",model:"test"}]
+  var socket = io('http://localhost:3000');
+
+  socket.on('receive message', function(data) {
+   console.log('Incoming message:', data);
+   $scope.messages.push(data);
+   console.log($scope.messages);
+  });
+
+  socket.on('connect', function() {
+    // Connected, let's sign-up for to receive messages for this room
+    console.log("connecter");
+  });
+
+  // $scope.connectChannel("testABC");
+  // $scope.sendMessage("testABC");
+
+
 });

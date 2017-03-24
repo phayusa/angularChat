@@ -12,9 +12,15 @@
   </head>
   <body>
     <div ng-controller="chanCtrl">
-      <input ng-repeat="channel in channels" type="button" value="{{channel.name}}" ng-click="connectChannel(channel.name)"/>
+      <div>
+        <input ng-repeat="channel in channels"
+        type="button" value="{{channel.name}}"
+        ng-click="connectChannel(channel.name)"/>
+      </div>
+      <input type="button" value="Envoyer" ng-click="sendMessage('dddddd')"/>
     </div>
     <!-- <ul id="messages"></ul> -->
-    <form-directive name="Send" buttons="buttonForm" submitText="ToSend" submit="sendMessage"/>
+    <!-- <form-directive name="Send" buttons="buttonForm" submitText="ToSend" submit="sendMessage"/> -->
+
   </body>
 </html>
