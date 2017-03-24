@@ -5,11 +5,10 @@ app.directive('roomDirective',function()
         scope: {
           room: '=',
           button: '&',
-          connect: '&',
+          messagesRoom: '=',
         },
         templateUrl: 'template/room.html',
         controller: function($scope) {
-          $scope.connectChannelFromRoom = $scope.$eval($scope.connect);
           $scope.sendMessageToChannel = $scope.$eval($scope.button);
 
         }

@@ -13,14 +13,53 @@
     <link rel="stylesheet" type="text/css" href="public/css/style.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <title>Chat</title>
+
   </head>
   <body>
     <div ng-controller="chanCtrl">
       <div class="container">
         <div class="row">
           <div ng-repeat="channel in channels">
-            <room-directive room="channel" button="sendMessage" connect="connectChannel" />
+            <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> {{channel.name}}
+                    <div class="btn-group pull-right">
+                        <a type="button" ng-click="connectChannel(channel.name, channel['_id'])" class="accordion btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#{{channel.name}}">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-collapse collapse accordion-test" id="{{channel.name}}">
+                    <div class="panel-body">
+                        <ul class="chat">
+                            <li class="left clearfix" ng-repeat="message in messages">
+                              <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                              </span>
+                              <div class="chat-body clearfix">
+                                  <div class="header">
+                                      <strong class="primary-font">Anonymous</strong> <small class="pull-right text-muted">
+
+                                  </div>
+                                  <p>
+                                    {{message}}
+                                  </p>
+                              </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm" ng-model="post.messageValue" placeholder="Type your message here..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" ng-click="sendMessage(post.messageValue)"> Send </button>
+                            </span>
+                        </div>
+                    </div>
+              </div>
           </div>
         </div>
       </div>

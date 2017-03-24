@@ -3,7 +3,7 @@
         <div class="panel-heading" id="accordion">
             <span class="glyphicon glyphicon-comment"></span> {{room.name}}
             <div class="btn-group pull-right">
-                <a type="button" ng-click="connectChannelFromRoom(room.name, room._id)" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#{{room.name}}">
+                <a type="button" ng-click="connectChannelFromRoom(room.name, room['_id'])" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#{{room.name}}">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </div>
@@ -73,7 +73,7 @@
                 <div class="input-group">
                     <input id="btn-input" type="text" class="form-control input-sm" ng-model="post.messageValue" placeholder="Type your message here..." />
                     <span class="input-group-btn">
-                        <button class="btn btn-warning btn-sm" ng-click="sendMessageToChannel(post.messageValue, room._id)"> Send </button>
+                        <button class="btn btn-warning btn-sm" ng-click="sendMessageToChannel(post.messageValue, room['_id'])"> Send </button>
                     </span>
                 </div>
             </div>
