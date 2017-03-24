@@ -125,30 +125,10 @@ app.get('/messages/:channel_id',function(req,res){
       // console.log("ObjectId(\""+req.params.id+"\")");
       db.collection(messageTable).find({"channel_id":o_id}).toArray(function (error, results) {
         if (error) throw error;
+        console.log(results);
         res.json(results);
       });
       db.close();
-  });
-})
-
-// Getting all the message with the channel id
-app.post('/messages/:channel_id',function(req,res){
-  console.log("receive port 8888 /channel/"+req.params.channel_id);
-  MongoClient.connect(dbName, function(error, db) {
-      if (error) throw error;
-      var o_id = new ObjectID(req.params.channel_id);
-
-      var newJson = req.body;
-      newJson["channel_id"] = o_id;
-
-      // console.log("ObjectId(\""+req.params.id+"\")");
-      db.collection(messageTable).insert(newJson, function (error, results) {
-        if (error) throw error;
-        // use insertedCount to know how many is insert
-        res.json(results);
-      });
-      db.close();
-
   });
 })
 
@@ -165,6 +145,8 @@ io.on('connection', function(socket){
   console.log("coco s'est connecter");
 
   socket.on("enter room", function(roomToJoin){
+
+    var jsonRoom = {"name":roomToJoin};
 
     MongoClient.connect(dbName, function(error, db) {
         if (error) throw error;
@@ -185,7 +167,6 @@ io.on('connection', function(socket){
     console.log("join on "+roomToJoin);
     socket.join(roomToJoin);
 
-    var jsonRoom = {"name":roomToJoin};
 
   });
 
@@ -194,8 +175,22 @@ io.on('connection', function(socket){
     socket.leave(roomToQuit);
   });
 
-  socket.on('send message', function(data) {
+  socket.on('send message', function(data, id_channel) {
       socket.emit("receive message",data);
+      MongoClient.connect(dbName, function(error, db) {
+          if (error) throw error;
+          var o_id = new ObjectID(id_channel);
+
+          var newJson = {"channel_id":o_id,"text":data};
+
+          // console.log("ObjectId(\""+req.params.id+"\")");
+          db.collection(messageTable).insert(newJson, function (error, results) {
+            if (error) throw error;
+            // use insertedCount to know how many is insert
+          });
+          db.close();
+
+      });
   });
 });
 

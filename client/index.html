@@ -7,6 +7,7 @@
     <script src="client.js"></script>
     <script src="controllers/channelController.js"></script>
     <script src="services/channelFactory.js"></script>
+    <script src="services/messageFactory.js"></script>
     <script src="directives/formDirective.js"></script>
     <title>Chat</title>
   </head>
@@ -15,7 +16,7 @@
       <div>
         <input ng-repeat="channel in channels"
         type="button" value="{{channel.name}}"
-        ng-click="connectChannel(channel.name)"/>
+        ng-click="connectChannel(channel.name,channel['_id'])"/>
       </div>
       <input type="button" value="Envoyer" ng-click="sendMessage('dddddd')"/>
     </div>
