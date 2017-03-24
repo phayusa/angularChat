@@ -10,7 +10,6 @@ var ObjectID = require('mongodb').ObjectID;
 var MongoClient = require("mongodb").MongoClient;
 var bodyParser = require('body-parser');
 
-
 // support json encoded bodies
 app.use(bodyParser.json());
 // support encoded bodies

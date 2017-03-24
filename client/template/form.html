@@ -1,9 +1,0 @@
-<div>
-  <form name="{{name}}" ng-submit="submit()" >
-    <fieldset ng-repeat="button in buttons" class="row">
-        <label for="button.idName" class="col-lg-3">{{button.label}}</label>
-        <input id="button.idName" type="text" style="width:150px" class="input-sm form-control " ng-model="button.model" ng-value="button.default" required>
-    </fieldset>
-    <button class="btn btn-primary" type="{{submitText}}"></button>
-  </form>
-</div>
