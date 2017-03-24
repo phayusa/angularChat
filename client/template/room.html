@@ -1,23 +1,14 @@
-<!-- <div class="room">
-  <h2>{{room}}</h2>
-  <fieldset class="row">
-
-  </fieldset>
-</div>
-<form name="name" ng-submit="submit()" >
-  <input ng-repeat="button in buttons" id="button.room_name" type="button" style="width:150px" class="btn btn-primary" ng-model="button.model" ng-value="button.value">
-</form> -->
 <div class="col-md-4">
     <div class="panel panel-primary">
         <div class="panel-heading" id="accordion">
-            <span class="glyphicon glyphicon-comment"></span> {{room}}
+            <span class="glyphicon glyphicon-comment"></span> {{room.name}}
             <div class="btn-group pull-right">
-                <a type="button" ng-click="connectChannelFromRoom(room)" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#{{room}}">
+                <a type="button" ng-click="connectChannelFromRoom(room.name, room._id)" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#{{room.name}}">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </div>
         </div>
-        <div class="panel-collapse collapse" id="{{room}}">
+        <div class="panel-collapse collapse" id="{{room.name}}">
             <div class="panel-body">
                 <ul class="chat">
                     <li class="left clearfix"><span class="chat-img pull-left">
@@ -82,7 +73,7 @@
                 <div class="input-group">
                     <input id="btn-input" type="text" class="form-control input-sm" ng-model="post.messageValue" placeholder="Type your message here..." />
                     <span class="input-group-btn">
-                        <button class="btn btn-warning btn-sm" ng-click="sendMessageToChannel(post.messageValue, room)"> Send </button>
+                        <button class="btn btn-warning btn-sm" ng-click="sendMessageToChannel(post.messageValue, room._id)"> Send </button>
                     </span>
                 </div>
             </div>

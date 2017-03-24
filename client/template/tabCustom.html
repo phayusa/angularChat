@@ -1,0 +1,13 @@
+<table class="col-lg-12">
+  <tr>
+    <th ng-repeat="header in headers">{{header}}</th>
+  </tr>
+  <tr ng-repeat="object in data">
+    <td ng-repeat="header in headers">{{object[header]}}</td>
+    <!-- <td><input type="button" ng-click="getClientById(client._id)" value="Voir"></td> -->
+    <!-- <td ng-repeat="button in buttons" ng-bind-html="getButton(button)"></td> -->
+    <td ng-repeat="button in buttons">
+      <button-directive value="button.value" type="button.type" callback="button.method" id="object['_id']"></button-directive>
+    </td>
+  </tr>
+</table>
