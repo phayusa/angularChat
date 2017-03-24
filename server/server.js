@@ -102,6 +102,8 @@ app.put('/channel/:id',function(req,res){
 
 io.on('connection', function(socket){
   console.log("coco s'est connecter");
+  console.log(socket.in("test"));
+  // io.emit("test");
   // socket.on('chat message', function(msg){
   //   io.emit('chat message', msg);
   // });

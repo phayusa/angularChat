@@ -28,6 +28,6 @@ app.controller('chanCtrl', function($scope, chanFactory){
   $scope.test = "sss";
   $scope.getAllChannels();
   $scope.socket = io('http://localhost:3000');
-  $scope.currentRoom = "";
+  $scope.currentRoom = "test";
   $scope.buttonForm = [{idName:"message",model:"test"}]
 });
